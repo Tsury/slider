@@ -239,7 +239,13 @@ export default function createSlider(Component) {
 
     calcValueByPos(position) {
       const pixelOffset = position - this.getSliderStart();
-      const nextValue = this.trimAlignValue(this.calcValue(pixelOffset));
+      const offsetVal = this.calcValue(pixelOffset);
+      
+      if (isNaN(offsetVal)) {
+        return this.props.value;
+      }
+      
+      const nextValue = this.trimAlignValue(offsetVal);
       return nextValue;
     }
 
